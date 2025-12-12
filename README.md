@@ -21,7 +21,7 @@ Visit [http://localhost:3000](http://localhost:3000) to view the site.
 
 ## Environment variables (Vercel / GitHub Secrets)
 
-There is no `.env` committed. Set these in Vercel Project → Settings → Environment Variables (and mirror in GitHub secrets if using CI):
+A `.env.example` is provided; copy it to `.env.local` for local runs, and set the same values in Vercel Project → Settings → Environment Variables (and mirror in GitHub secrets if using CI):
 
 - `ADMIN_USERNAME` — required. Admin login username.
 - `ADMIN_PASSWORD` — required. Admin login password.
