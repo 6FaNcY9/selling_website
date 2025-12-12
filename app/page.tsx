@@ -44,6 +44,57 @@ export default function Home() {
     "Promote the production build with a single click",
   ];
 
+  const integrations = [
+    {
+      name: "Vercel",
+      detail: "Zero-config previews, edge delivery, and observability built in.",
+    },
+    {
+      name: "GitHub",
+      detail: "Import, protect branches, and ship PR previews for every Codex run.",
+    },
+    {
+      name: "Analytics",
+      detail: "Drop in analytics endpoints so Codex can instrument funnels safely.",
+    },
+  ];
+
+  const offers = [
+    {
+      title: "Launch",
+      price: "$0",
+      note: "Best for quick demos and validation sprints.",
+      bullets: ["Dark theme base", "Dynamic instruction slots", "Vercel deploys"],
+    },
+    {
+      title: "Growth",
+      price: "$39",
+      note: "For teams wanting richer sections and gated offers.",
+      bullets: [
+        "Feature & pricing sections",
+        "Promo banners + CTA variants",
+        "Analytics & preview hooks",
+      ],
+    },
+    {
+      title: "Scale",
+      price: "$89",
+      note: "Production-ready with oversight and handoff tooling.",
+      bullets: [
+        "Changelog & audit trail",
+        "Observability prompts",
+        "Custom domains & edge caching",
+      ],
+    },
+  ];
+
+  const stats = [
+    { label: "Previews per branch", value: "Unlimited" },
+    { label: "Instruction slots", value: "12+" },
+    { label: "Edge regions", value: "Global" },
+    { label: "Time to first deploy", value: "<10 min" },
+  ];
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-black text-slate-100">
       <div className="mx-auto flex max-w-6xl flex-col gap-12 px-6 py-12">
@@ -307,6 +358,138 @@ npm run build`}
               >
                 Deploy on Vercel
               </a>
+            </div>
+          </section>
+
+          <section className="grid gap-6 rounded-3xl border border-slate-800 bg-slate-900/60 p-8 lg:grid-cols-[1fr_1.2fr]">
+            <div className="space-y-4">
+              <p className="text-sm font-semibold text-slate-200">
+                Conversion-focused packages
+              </p>
+              <p className="text-lg text-slate-300">
+                Pick a starting level and let Codex adapt sections, offers, and
+                tone based on your target audience.
+              </p>
+              <div className="grid gap-4 md:grid-cols-3">
+                {offers.map((offer) => (
+                  <div
+                    key={offer.title}
+                    className="flex flex-col gap-3 rounded-2xl border border-slate-800 bg-slate-950/60 p-4"
+                  >
+                    <div className="flex items-center justify-between">
+                      <p className="text-base font-semibold text-white">
+                        {offer.title}
+                      </p>
+                      <span className="text-sm font-semibold text-sky-200">
+                        {offer.price}
+                      </span>
+                    </div>
+                    <p className="text-sm text-slate-300">{offer.note}</p>
+                    <ul className="space-y-2 text-sm text-slate-200">
+                      {offer.bullets.map((bullet) => (
+                        <li
+                          key={bullet}
+                          className="flex items-start gap-2 rounded-xl border border-slate-800 bg-slate-900/70 p-2"
+                        >
+                          <span className="mt-1 h-2 w-2 rounded-full bg-sky-400" />
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <button className="mt-auto rounded-lg border border-slate-700 px-4 py-2 text-sm font-semibold text-slate-100 transition hover:border-sky-400">
+                      Select
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-5 rounded-2xl border border-slate-800 bg-slate-950/50 p-6">
+              <div className="flex items-center justify-between">
+                <p className="text-sm font-semibold text-white">Live stats</p>
+                <span className="rounded-full bg-emerald-500/20 px-3 py-1 text-xs text-emerald-200">
+                  Auto-updated
+                </span>
+              </div>
+              <div className="grid gap-4 sm:grid-cols-2">
+                {stats.map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="rounded-xl border border-slate-800 bg-slate-900/60 p-4"
+                  >
+                    <p className="text-xs uppercase tracking-wide text-slate-400">
+                      {stat.label}
+                    </p>
+                    <p className="text-2xl font-semibold text-white">
+                      {stat.value}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <p className="text-sm text-slate-300">
+                Codex can refresh these metrics from your analytics provider so
+                every deploy stays aligned with real performance.
+              </p>
+            </div>
+          </section>
+
+          <section className="grid gap-6 rounded-3xl border border-slate-800 bg-slate-900/60 p-8 lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="space-y-4">
+              <p className="text-sm font-semibold text-slate-200">
+                Integration ready
+              </p>
+              <p className="text-lg text-slate-300">
+                Hook Codex into your delivery stack so updates, previews, and
+                telemetry stay synchronized.
+              </p>
+              <div className="grid gap-4 md:grid-cols-3">
+                {integrations.map((integration) => (
+                  <div
+                    key={integration.name}
+                    className="rounded-2xl border border-slate-800 bg-slate-950/60 p-4"
+                  >
+                    <p className="text-base font-semibold text-white">
+                      {integration.name}
+                    </p>
+                    <p className="text-sm text-slate-300">
+                      {integration.detail}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-4 rounded-2xl border border-slate-800 bg-slate-950/50 p-6">
+              <p className="text-sm font-semibold text-white">
+                Ready to deploy?
+              </p>
+              <p className="text-sm text-slate-300">
+                Connect your repo to Vercel, enable previews, and let Codex keep
+                your selling story fresh.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <a
+                  href="https://vercel.com/import"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-lg bg-sky-500 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-sky-400"
+                >
+                  Import to Vercel
+                </a>
+                <a
+                  href="#instructions"
+                  className="rounded-lg border border-slate-700 px-4 py-2 text-sm font-semibold text-slate-100 transition hover:border-sky-400"
+                >
+                  See instructions
+                </a>
+              </div>
+              <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-4 text-sm text-slate-200">
+                <p className="font-semibold text-white">Support</p>
+                <p className="text-slate-300">
+                  Need help wiring a new signal or deployment rule? Codex can
+                  draft the change log and update the instruction canvas for you.
+                </p>
+              </div>
             </div>
           </section>
         </main>
