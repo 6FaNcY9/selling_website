@@ -24,13 +24,15 @@ type AdminDashboardProps = {
 };
 
 const makeId = () => {
-  if (typeof crypto !== "undefined" && "randomUUID" in crypto) {
-    return crypto.randomUUID();
+  const cryptoObj = typeof globalThis !== "undefined" ? globalThis.crypto : undefined;
+
+  if (cryptoObj?.randomUUID) {
+    return cryptoObj.randomUUID();
   }
 
-  if (typeof crypto !== "undefined" && "getRandomValues" in crypto) {
+  if (cryptoObj?.getRandomValues) {
     const buffer = new Uint32Array(4);
-    crypto.getRandomValues(buffer);
+    cryptoObj.getRandomValues(buffer);
     return Array.from(buffer, (value) => value.toString(16)).join("-");
   }
 

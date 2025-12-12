@@ -18,13 +18,8 @@ const ADMIN_PASSWORD =
 const ADMIN_SESSION_SECRET =
   process.env.ADMIN_SESSION_SECRET ||
   process.env.AUTH_SECRET ||
-  (!isProduction ? DEV_FALLBACK_SESSION_SECRET : undefined);
-
-if (!ADMIN_USERNAME || !ADMIN_PASSWORD || !ADMIN_SESSION_SECRET) {
-  throw new Error(
-    "Admin credentials are not configured. Set ADMIN_USERNAME, ADMIN_PASSWORD, and ADMIN_SESSION_SECRET in your environment (GitHub Secrets + Vercel).",
-  );
-}
+  (!isProduction ? DEV_FALLBACK_SESSION_SECRET : undefined) ||
+  randomUUID();
 
 type SearchParams = {
   error?: string;
