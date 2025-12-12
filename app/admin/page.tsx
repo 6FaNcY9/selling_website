@@ -57,31 +57,31 @@ const secureCookie = process.env.NODE_ENV === "production";
 
 const baseContent = {
   hero: {
-    headline: "Shape the selling story without touching code.",
+    headline: "Curate drops and suppliers without touching code.",
     subheading:
-      "Use the admin canvas to iterate on hero copy, CTAs, offers, and onboarding steps while Codex keeps the UI stable.",
-    ctaLabel: "Preview changes",
+      "Use the admin canvas to refresh AmberDrops collections, set supplier priorities, and keep customers updated with clear shipping windows.",
+    ctaLabel: "Preview storefront",
   },
   offers: [
     {
-      id: "launch",
-      title: "Launch",
-      price: "$0",
-      note: "Draft-level edits for quick demos.",
-      bullets: ["Hero + CTA copy", "Offer slots", "Preview-only publish"],
+      id: "starter",
+      title: "Starter Finds",
+      price: "Free",
+      note: "Curated essentials with weekly drops.",
+      bullets: ["Amazon & Temu picks", "Clear delivery windows", "Email tracking"],
     },
     {
-      id: "growth",
-      title: "Growth",
-      price: "$39",
-      note: "Includes promo states and gated content.",
-      bullets: ["Promo toggles", "Gated CTAs", "Analytics-ready"],
+      id: "priority",
+      title: "Priority Drops",
+      price: "$29/mo",
+      note: "Early access to new collections and bundled shipping options.",
+      bullets: ["Early access releases", "Bundled shipping", "Priority support"],
     },
   ],
   launchSteps: [
-    "Store ADMIN_* secrets in GitHub and sync to Vercel environment variables.",
-    "Log in with the admin credential to unlock editing controls.",
-    "Add or remove offers, adjust hero copy, and capture new admin signups.",
+    "Store ADMIN_* secrets securely, then sign in to unlock the panel.",
+    "Curate collections, set supplier preferences, and save the hero story.",
+    "Publish updates so shoppers see fresh drops and accurate shipping windows.",
   ],
 };
 
@@ -164,29 +164,29 @@ export default async function AdminPage({
   const isAuthenticated = isValidSessionToken(cookieValue);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-black text-slate-100">
+    <div className="min-h-screen bg-gradient-to-b from-orange-950 via-rose-950 to-black text-amber-50">
       <div className="mx-auto flex max-w-5xl flex-col gap-8 px-6 py-12">
         <div className="flex flex-col gap-2">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-400">
+          <p className="text-xs uppercase tracking-[0.3em] text-amber-200/70">
             Admin control room
           </p>
           <h1 className="text-3xl font-semibold text-white md:text-4xl">
-            Manage content, offers, and access from one panel.
+            Manage drops, suppliers, and access from one panel.
           </h1>
-          <p className="text-slate-300">
-            Credentials are backed by environment secrets (GitHub & Vercel).
-            Sign in with the admin account to start editing safely.
+          <p className="text-amber-100/80">
+            Credentials are backed by environment secrets. Sign in to refresh collections, shipping windows, and supplier
+            priorities without touching code.
           </p>
         </div>
 
         {!isAuthenticated ? (
-          <section className="grid gap-6 rounded-3xl border border-slate-800 bg-slate-950/70 p-6 lg:grid-cols-[1.1fr_0.9fr]">
+          <section className="grid gap-6 rounded-3xl border border-orange-900/70 bg-amber-500/5 p-6 lg:grid-cols-[1.1fr_0.9fr]">
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <p className="text-lg font-semibold text-white">
                   Secure admin login
                 </p>
-                <span className="rounded-full bg-sky-500/20 px-3 py-1 text-xs font-semibold text-sky-200">
+                <span className="rounded-full bg-amber-500/20 px-3 py-1 text-xs font-semibold text-amber-200">
                   Protected
                 </span>
               </div>
@@ -204,20 +204,20 @@ export default async function AdminPage({
                 </p>
               ) : null}
               <form action={login} className="space-y-4">
-                <label className="space-y-1 text-sm text-slate-200">
+                <label className="space-y-1 text-sm text-amber-100/80">
                   Username
                   <input
-                    className="w-full rounded-lg border border-slate-800 bg-slate-900/80 px-3 py-2 text-sm text-slate-100 outline-none ring-1 ring-transparent transition focus:border-sky-500 focus:ring-sky-500/40"
+                    className="w-full rounded-lg border border-orange-900/70 bg-black/60 px-3 py-2 text-sm text-amber-50 outline-none ring-1 ring-transparent transition focus:border-amber-500 focus:ring-amber-500/40"
                     name="username"
                     placeholder="admin"
                     autoComplete="username"
                     required
                   />
                 </label>
-                <label className="space-y-1 text-sm text-slate-200">
+                <label className="space-y-1 text-sm text-amber-100/80">
                   Password
                   <input
-                    className="w-full rounded-lg border border-slate-800 bg-slate-900/80 px-3 py-2 text-sm text-slate-100 outline-none ring-1 ring-transparent transition focus:border-sky-500 focus:ring-sky-500/40"
+                    className="w-full rounded-lg border border-orange-900/70 bg-black/60 px-3 py-2 text-sm text-amber-50 outline-none ring-1 ring-transparent transition focus:border-amber-500 focus:ring-amber-500/40"
                     type="password"
                     name="password"
                     placeholder="••••••••••"
@@ -227,21 +227,20 @@ export default async function AdminPage({
                 </label>
                 <button
                   type="submit"
-                  className="w-full rounded-lg bg-sky-500 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-sky-400"
+                  className="w-full rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-amber-400"
                 >
                   Sign in as admin
                 </button>
                 {!isProduction ? (
-                  <p className="text-xs text-slate-400">
-                    Development defaults: admin / fancyvinoadmin2025. Always set
-                    ADMIN_USERNAME and ADMIN_PASSWORD secrets for live
-                    deployments.
+                  <p className="text-xs text-amber-200/80">
+                    Development defaults are available for local testing. Always set ADMIN_USERNAME and ADMIN_PASSWORD
+                    secrets for live deployments.
                   </p>
                 ) : null}
               </form>
             </div>
 
-            <div className="flex flex-col gap-4 rounded-2xl border border-slate-800 bg-slate-950/60 p-5">
+            <div className="flex flex-col gap-4 rounded-2xl border border-orange-900/70 bg-amber-500/5 p-5">
               <div className="flex items-center justify-between">
                 <p className="text-sm font-semibold text-white">
                   Secure storage
@@ -250,48 +249,45 @@ export default async function AdminPage({
                   Secrets
                 </span>
               </div>
-              <p className="text-sm text-slate-300">
-                Use GitHub Actions secrets and Vercel environment variables to
-                avoid hard-coding credentials. The panel reads:
+              <p className="text-sm text-amber-100/80">
+                Use GitHub Actions secrets and environment variables to avoid hard-coding credentials. The panel reads:
               </p>
-              <ul className="space-y-2 text-sm text-slate-200">
-                <li className="flex items-start gap-2 rounded-lg border border-slate-800 bg-slate-900/60 p-2">
-                  <span className="mt-1 h-2 w-2 rounded-full bg-sky-400" />
-                  <code className="text-xs text-sky-100">ADMIN_USERNAME</code>
+              <ul className="space-y-2 text-sm text-amber-100/80">
+                <li className="flex items-start gap-2 rounded-lg border border-orange-900/70 bg-black/50 p-2">
+                  <span className="mt-1 h-2 w-2 rounded-full bg-amber-400" />
+                  <code className="text-xs text-amber-100">ADMIN_USERNAME</code>
                 </li>
-                <li className="flex items-start gap-2 rounded-lg border border-slate-800 bg-slate-900/60 p-2">
-                  <span className="mt-1 h-2 w-2 rounded-full bg-sky-400" />
-                  <code className="text-xs text-sky-100">ADMIN_PASSWORD</code>
+                <li className="flex items-start gap-2 rounded-lg border border-orange-900/70 bg-black/50 p-2">
+                  <span className="mt-1 h-2 w-2 rounded-full bg-amber-400" />
+                  <code className="text-xs text-amber-100">ADMIN_PASSWORD</code>
                 </li>
-                <li className="flex items-start gap-2 rounded-lg border border-slate-800 bg-slate-900/60 p-2">
-                  <span className="mt-1 h-2 w-2 rounded-full bg-sky-400" />
-                  <code className="text-xs text-sky-100">
+                <li className="flex items-start gap-2 rounded-lg border border-orange-900/70 bg-black/50 p-2">
+                  <span className="mt-1 h-2 w-2 rounded-full bg-amber-400" />
+                  <code className="text-xs text-amber-100">
                     ADMIN_SESSION_SECRET
                   </code>
                 </li>
               </ul>
-              <p className="text-sm text-slate-300">
-                Set them in GitHub Secrets for CI and sync to Vercel Project →
-                Settings → Environment Variables to keep production secure.
+              <p className="text-sm text-amber-100/80">
+                Set them in GitHub Secrets for CI and sync to your hosting environment to keep production secure.
               </p>
             </div>
           </section>
         ) : (
-          <section className="space-y-6 rounded-3xl border border-slate-800 bg-slate-950/70 p-6">
+          <section className="space-y-6 rounded-3xl border border-orange-900/70 bg-amber-500/5 p-6">
             <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
               <div>
                 <p className="text-lg font-semibold text-white">
                   Welcome, admin
                 </p>
-                <p className="text-sm text-slate-300">
-                  Edit content safely. Changes stay in-memory until wired to
-                  your CMS or deployment pipeline.
+                <p className="text-sm text-amber-100/80">
+                  Edit content safely. Changes stay in-memory until wired to your CMS or deployment workflow.
                 </p>
               </div>
               <form action={logout}>
                 <button
                   type="submit"
-                  className="rounded-lg border border-slate-700 px-4 py-2 text-sm font-semibold text-slate-100 transition hover:border-sky-400"
+                  className="rounded-lg border border-orange-900/70 px-4 py-2 text-sm font-semibold text-amber-50 transition hover:border-amber-400"
                 >
                   Sign out
                 </button>
@@ -304,12 +300,12 @@ export default async function AdminPage({
               launchSteps={baseContent.launchSteps}
             />
 
-            <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4 text-sm text-slate-200">
+            <div className="rounded-2xl border border-orange-900/70 bg-black/50 p-4 text-sm text-amber-100/80">
               <p className="font-semibold text-white">Security notes</p>
-              <ul className="mt-2 space-y-1 text-slate-300">
+              <ul className="mt-2 space-y-1 text-amber-100/80">
                 <li>
-                  Rotate <code className="text-xs text-sky-100">ADMIN_PASSWORD</code> and{" "}
-                  <code className="text-xs text-sky-100">
+                  Rotate <code className="text-xs text-amber-100">ADMIN_PASSWORD</code> and{" "}
+                  <code className="text-xs text-amber-100">
                     ADMIN_SESSION_SECRET
                   </code>{" "}
                   via GitHub/Vercel secrets.
