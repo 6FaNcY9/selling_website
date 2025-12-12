@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -27,36 +28,36 @@ export default function RootLayout({
                 </p>
               </div>
               <nav className="flex flex-wrap items-center gap-3 text-sm font-medium text-slate-200">
-                <a
+                <Link
                   className="rounded-full border border-slate-800 px-3 py-1 transition hover:border-sky-400 hover:text-white"
                   href="/"
                 >
                   Home
-                </a>
-                <a
+                </Link>
+                <Link
                   className="rounded-full border border-slate-800 px-3 py-1 transition hover:border-sky-400 hover:text-white"
                   href="/selling"
                 >
                   Selling
-                </a>
-                <a
+                </Link>
+                <Link
                   className="rounded-full border border-slate-800 px-3 py-1 transition hover:border-sky-400 hover:text-white"
                   href="/about"
                 >
                   About
-                </a>
-                <a
+                </Link>
+                <Link
                   className="rounded-full border border-slate-800 px-3 py-1 transition hover:border-sky-400 hover:text-white"
                   href="/login"
                 >
                   Login
-                </a>
-                <a
+                </Link>
+                <Link
                   className="rounded-full bg-sky-500 px-3 py-1 text-slate-950 transition hover:bg-sky-400"
                   href="/admin"
                 >
                   Admin
-                </a>
+                </Link>
               </nav>
             </div>
           </header>
