@@ -2,6 +2,7 @@ import AdminDashboard from "./AdminDashboard";
 import { createHmac, randomUUID, timingSafeEqual } from "crypto";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { categories, products } from "../data/catalog";
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -303,6 +304,116 @@ export default async function AdminPage({
               offers={baseContent.offers}
               launchSteps={baseContent.launchSteps}
             />
+
+            <section className="grid gap-4 rounded-2xl border border-slate-800 bg-slate-900/60 p-4 md:grid-cols-3">
+              <div className="space-y-2 rounded-xl border border-slate-800 bg-slate-950/60 p-3">
+                <p className="text-sm font-semibold text-white">Catalog overview</p>
+                <p className="text-3xl font-bold text-white">{products.length}</p>
+                <p className="text-xs text-slate-400">Decoy products seeded with imagery and pricing.</p>
+              </div>
+              <div className="space-y-2 rounded-xl border border-slate-800 bg-slate-950/60 p-3">
+                <p className="text-sm font-semibold text-white">Categories</p>
+                <p className="text-3xl font-bold text-white">{categories.length}</p>
+                <p className="text-xs text-slate-400">Electronics, home, wellness, outdoor, fashion.</p>
+              </div>
+              <div className="space-y-2 rounded-xl border border-slate-800 bg-slate-950/60 p-3">
+                <p className="text-sm font-semibold text-white">Next steps</p>
+                <ul className="space-y-1 text-xs text-slate-300">
+                  <li>• Connect to headless commerce API</li>
+                  <li>• Map add-to-cart actions</li>
+                  <li>• Publish to production</li>
+                </ul>
+              </div>
+            </section>
+
+            <section className="grid gap-4 rounded-2xl border border-slate-800 bg-slate-900/60 p-4 md:grid-cols-[1.1fr_0.9fr]">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <p className="text-sm font-semibold text-white">Catalog manager</p>
+                  <span className="rounded-full bg-sky-500/20 px-3 py-1 text-xs font-semibold text-sky-200">CRUD-ready</span>
+                </div>
+                <div className="rounded-xl border border-slate-800 bg-slate-950/70 p-3 text-sm text-slate-200">
+                  <p className="font-semibold text-white">Products (preview)</p>
+                  <div className="mt-2 grid gap-2 text-xs text-slate-300">
+                    {products.slice(0, 4).map((product) => (
+                      <div
+                        key={product.slug}
+                        className="flex items-center justify-between rounded-lg border border-slate-800 bg-slate-900/60 px-3 py-2"
+                      >
+                        <div>
+                          <p className="font-semibold text-white">{product.name}</p>
+                          <p className="text-slate-400">{product.category} • ${product.price}</p>
+                        </div>
+                        <span className="rounded-full bg-slate-800 px-2 py-1 text-[11px] font-semibold text-slate-200">
+                          {product.inventoryStatus}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="grid gap-3 text-sm text-slate-300 md:grid-cols-2">
+                  <label className="space-y-1">
+                    Name
+                    <input
+                      className="w-full rounded-lg border border-slate-800 bg-slate-900/80 px-3 py-2 text-sm text-slate-100 outline-none ring-1 ring-transparent transition focus:border-sky-500 focus:ring-sky-500/40"
+                      placeholder="Product name"
+                    />
+                  </label>
+                  <label className="space-y-1">
+                    Price
+                    <input
+                      className="w-full rounded-lg border border-slate-800 bg-slate-900/80 px-3 py-2 text-sm text-slate-100 outline-none ring-1 ring-transparent transition focus:border-sky-500 focus:ring-sky-500/40"
+                      placeholder="$99"
+                    />
+                  </label>
+                  <label className="space-y-1">
+                    Category
+                    <select className="w-full rounded-lg border border-slate-800 bg-slate-900/80 px-3 py-2 text-sm text-slate-100 outline-none ring-1 ring-transparent transition focus:border-sky-500 focus:ring-sky-500/40">
+                      {categories.map((category) => (
+                        <option key={category.slug}>{category.name}</option>
+                      ))}
+                    </select>
+                  </label>
+                  <label className="space-y-1">
+                    Image URL
+                    <input
+                      className="w-full rounded-lg border border-slate-800 bg-slate-900/80 px-3 py-2 text-sm text-slate-100 outline-none ring-1 ring-transparent transition focus:border-sky-500 focus:ring-sky-500/40"
+                      placeholder="https://..."
+                    />
+                  </label>
+                </div>
+                <button className="w-full rounded-lg bg-sky-500 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-sky-400">
+                  Save draft product
+                </button>
+              </div>
+
+              <div className="space-y-3 rounded-xl border border-slate-800 bg-slate-950/70 p-4 text-sm text-slate-200">
+                <p className="text-sm font-semibold text-white">Category manager</p>
+                <ul className="space-y-2 text-xs text-slate-300">
+                  {categories.map((category) => (
+                    <li
+                      key={category.slug}
+                      className="flex items-center justify-between rounded-lg border border-slate-800 bg-slate-900/60 px-3 py-2"
+                    >
+                      <div>
+                        <p className="font-semibold text-white">{category.name}</p>
+                        <p className="text-slate-400">{category.description}</p>
+                      </div>
+                      <a
+                        className="text-[11px] font-semibold text-sky-300 underline-offset-4 hover:text-white hover:underline"
+                        href={`/categories/${category.slug}`}
+                      >
+                        Preview
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+                <div className="space-y-2 text-xs text-slate-400">
+                  <p>Use this panel to bulk import decoy items, adjust pricing, or sync with a remote CMS.</p>
+                  <p>Hook up the save buttons to your API routes to persist changes.</p>
+                </div>
+              </div>
+            </section>
 
             <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4 text-sm text-slate-200">
               <p className="font-semibold text-white">Security notes</p>
