@@ -9,17 +9,45 @@ const DEV_FALLBACK_USERNAME = "admin";
 const DEV_FALLBACK_PASSWORD = "fancyvinoadmin2025"; // Dev-only fallback
 const DEV_FALLBACK_SESSION_SECRET = "change-me-secret"; // Dev-only fallback
 
+/**
+ * Session secret precedence:
+ * 1) ADMIN_SESSION_SECRET or AUTH_SECRET (preferred)
+ * 2) Dev-only fallback secret when not in production
+ * 3) Salted HMAC of admin credentials for deterministic fallback in production
+ *    (set ADMIN_SESSION_SALT in production to avoid the static salt fallback)
+ */
+const getSessionSecret = () => {
+  const envSecret = process.env.ADMIN_SESSION_SECRET || process.env.AUTH_SECRET;
+  if (envSecret) return envSecret;
+
+  if (!isProduction) return DEV_FALLBACK_SESSION_SECRET;
+
+  if (!process.env.ADMIN_USERNAME || !process.env.ADMIN_PASSWORD) return undefined;
+
+  const credentialKey = JSON.stringify([
+    process.env.ADMIN_USERNAME,
+    process.env.ADMIN_PASSWORD,
+  ]);
+
+  const saltBase =
+    process.env.ADMIN_SESSION_SALT ||
+    process.env.VERCEL_URL ||
+    "admin-session-salt";
+
+  const salt = createHmac("sha256", saltBase)
+    .update(credentialKey)
+    .digest("hex");
+
+  return createHmac("sha256", salt).update(credentialKey).digest("hex");
+};
+
 const ADMIN_USERNAME =
   process.env.ADMIN_USERNAME ||
   (!isProduction ? DEV_FALLBACK_USERNAME : undefined);
 const ADMIN_PASSWORD =
   process.env.ADMIN_PASSWORD ||
   (!isProduction ? DEV_FALLBACK_PASSWORD : undefined);
-const ADMIN_SESSION_SECRET =
-  process.env.ADMIN_SESSION_SECRET ||
-  process.env.AUTH_SECRET ||
-  (!isProduction ? DEV_FALLBACK_SESSION_SECRET : undefined) ||
-  randomUUID();
+const ADMIN_SESSION_SECRET = getSessionSecret();
 
 type SearchParams = {
   error?: string;
@@ -57,8 +85,15 @@ const baseContent = {
   ],
 };
 
-const signToken = (nonce: string) =>
-  createHmac("sha256", ADMIN_SESSION_SECRET).update(nonce).digest("hex");
+const signToken = (nonce: string) => {
+  if (!ADMIN_SESSION_SECRET) {
+    throw new Error(
+      "Admin session secret is missing. Configure ADMIN_SESSION_SECRET or AUTH_SECRET.",
+    );
+  }
+
+  return createHmac("sha256", ADMIN_SESSION_SECRET).update(nonce).digest("hex");
+};
 
 const createSessionToken = () => {
   const nonce = randomUUID();
@@ -81,6 +116,10 @@ const isValidSessionToken = (token?: string) => {
 
 async function login(formData: FormData) {
   "use server";
+
+  if (!ADMIN_USERNAME || !ADMIN_PASSWORD) {
+    redirect("/admin?error=setup");
+  }
 
   const username = `${formData.get("username") || ""}`.trim();
   const password = `${formData.get("password") || ""}`.trim();
@@ -155,6 +194,13 @@ export default async function AdminPage({
                 <p className="rounded-lg border border-rose-500/50 bg-rose-500/10 px-3 py-2 text-sm text-rose-100">
                   Invalid credentials. Confirm the admin username/password stored
                   in your environment.
+                </p>
+              ) : null}
+              {resolvedSearchParams?.error === "setup" ? (
+                <p className="rounded-lg border border-amber-500/50 bg-amber-500/10 px-3 py-2 text-sm text-amber-100">
+                  Admin credentials are not configured. Set ADMIN_USERNAME and
+                  ADMIN_PASSWORD as environment variables, and optionally
+                  ADMIN_SESSION_SECRET for a stable session key.
                 </p>
               ) : null}
               <form action={login} className="space-y-4">
