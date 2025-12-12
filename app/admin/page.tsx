@@ -233,7 +233,7 @@ export default async function AdminPage({
                 </button>
                 {!isProduction ? (
                   <p className="text-xs text-amber-200/80">
-                    Development defaults: admin / fancyvinoadmin2025. Always set ADMIN_USERNAME and ADMIN_PASSWORD
+                    Development defaults are available for local testing. Always set ADMIN_USERNAME and ADMIN_PASSWORD
                     secrets for live deployments.
                   </p>
                 ) : null}
