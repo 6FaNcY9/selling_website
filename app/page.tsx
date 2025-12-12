@@ -1,3 +1,5 @@
+import ProductShowcase from "./ProductShowcase";
+
 export default function Home() {
   const capabilityPillars = [
     {
@@ -207,6 +209,8 @@ Promise:
               </div>
             </div>
           </section>
+
+          <ProductShowcase />
 
           <section
             id="blueprint"
