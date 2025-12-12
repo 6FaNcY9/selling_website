@@ -28,7 +28,13 @@ const makeId = () => {
     return crypto.randomUUID();
   }
 
-  return Math.random().toString(36).slice(2);
+  if (typeof crypto !== "undefined" && "getRandomValues" in crypto) {
+    const buffer = new Uint32Array(4);
+    crypto.getRandomValues(buffer);
+    return Array.from(buffer, (value) => value.toString(16)).join("-");
+  }
+
+  throw new Error("Secure random generator unavailable for ID creation.");
 };
 
 export default function AdminDashboard({
@@ -274,7 +280,7 @@ export default function AdminDashboard({
                 placeholder="$39"
               />
             </label>
-            <label className="space-y-1 text-sm text-slate-200 md:col-span-1 md:[grid-column:span_1_/_span_1]">
+            <label className="space-y-1 text-sm text-slate-200 md:col-span-1">
               Note
               <input
                 className="w-full rounded-lg border border-slate-800 bg-slate-950/60 px-3 py-2 text-sm text-slate-100 outline-none ring-1 ring-transparent transition focus:border-sky-500 focus:ring-sky-500/40"
@@ -288,7 +294,7 @@ export default function AdminDashboard({
             <button
               type="button"
               onClick={addOffer}
-              className="md:col-span-3 rounded-lg bg-sky-500 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-sky-400"
+              className="rounded-lg bg-sky-500 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-sky-400 md:col-span-3"
             >
               Add offer to preview
             </button>

@@ -1,14 +1,30 @@
 import AdminDashboard from "./AdminDashboard";
-import { createHash } from "crypto";
+import { createHmac, randomUUID, timingSafeEqual } from "crypto";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-const ADMIN_USERNAME = process.env.ADMIN_USERNAME || "admin";
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "fancyvinoadmin2025";
+const isProduction = process.env.NODE_ENV === "production";
+
+const DEV_FALLBACK_USERNAME = "admin";
+const DEV_FALLBACK_PASSWORD = "fancyvinoadmin2025"; // Dev-only fallback
+const DEV_FALLBACK_SESSION_SECRET = "change-me-secret"; // Dev-only fallback
+
+const ADMIN_USERNAME =
+  process.env.ADMIN_USERNAME ||
+  (!isProduction ? DEV_FALLBACK_USERNAME : undefined);
+const ADMIN_PASSWORD =
+  process.env.ADMIN_PASSWORD ||
+  (!isProduction ? DEV_FALLBACK_PASSWORD : undefined);
 const ADMIN_SESSION_SECRET =
   process.env.ADMIN_SESSION_SECRET ||
   process.env.AUTH_SECRET ||
-  "change-me-secret";
+  (!isProduction ? DEV_FALLBACK_SESSION_SECRET : undefined);
+
+if (!ADMIN_USERNAME || !ADMIN_PASSWORD || !ADMIN_SESSION_SECRET) {
+  throw new Error(
+    "Admin credentials are not configured. Set ADMIN_USERNAME, ADMIN_PASSWORD, and ADMIN_SESSION_SECRET in your environment (GitHub Secrets + Vercel).",
+  );
+}
 
 type SearchParams = {
   error?: string;
@@ -46,16 +62,33 @@ const baseContent = {
   ],
 };
 
-const expectedToken = () =>
-  createHash("sha256")
-    .update(`${ADMIN_USERNAME}:${ADMIN_PASSWORD}:${ADMIN_SESSION_SECRET}`)
-    .digest("hex");
+const signToken = (nonce: string) =>
+  createHmac("sha256", ADMIN_SESSION_SECRET).update(nonce).digest("hex");
+
+const createSessionToken = () => {
+  const nonce = randomUUID();
+  const signature = signToken(nonce);
+  return `${nonce}.${signature}`;
+};
+
+const isValidSessionToken = (token?: string) => {
+  if (!token) return false;
+  const [nonce, signature] = token.split(".");
+  if (!nonce || !signature) return false;
+  const expectedSignature = signToken(nonce);
+
+  const signatureBuffer = Buffer.from(signature);
+  const expectedBuffer = Buffer.from(expectedSignature);
+  if (signatureBuffer.length !== expectedBuffer.length) return false;
+
+  return timingSafeEqual(signatureBuffer, expectedBuffer);
+};
 
 async function login(formData: FormData) {
   "use server";
 
   const username = `${formData.get("username") || ""}`.trim();
-  const password = `${formData.get("password") || ""}`;
+  const password = `${formData.get("password") || ""}`.trim();
 
   if (username !== ADMIN_USERNAME || password !== ADMIN_PASSWORD) {
     redirect("/admin?error=invalid");
@@ -65,7 +98,7 @@ async function login(formData: FormData) {
 
   cookieStore.set({
     name: "admin-session",
-    value: expectedToken(),
+    value: createSessionToken(),
     httpOnly: true,
     sameSite: "lax",
     secure: secureCookie,
@@ -90,14 +123,11 @@ export default async function AdminPage({
 }: {
   searchParams?: SearchParams | Promise<SearchParams>;
 }) {
-  const resolvedSearchParams =
-    searchParams && typeof (searchParams as Promise<SearchParams>).then === "function"
-      ? await (searchParams as Promise<SearchParams>)
-      : (searchParams as SearchParams | undefined);
+  const resolvedSearchParams = (await searchParams) ?? undefined;
 
   const cookieStore = await cookies();
   const cookieValue = cookieStore.get("admin-session")?.value;
-  const isAuthenticated = cookieValue === expectedToken();
+  const isAuthenticated = isValidSessionToken(cookieValue);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-black text-slate-100">
@@ -160,10 +190,13 @@ export default async function AdminPage({
                 >
                   Sign in as admin
                 </button>
-                <p className="text-xs text-slate-400">
-                  Default credentials: admin / fancyvinoadmin2025. Override them
-                  using ADMIN_USERNAME and ADMIN_PASSWORD secrets.
-                </p>
+                {!isProduction ? (
+                  <p className="text-xs text-slate-400">
+                    Development defaults: admin / fancyvinoadmin2025. Always set
+                    ADMIN_USERNAME and ADMIN_PASSWORD secrets for live
+                    deployments.
+                  </p>
+                ) : null}
               </form>
             </div>
 
