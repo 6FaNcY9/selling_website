@@ -11,6 +11,16 @@ npm run dev
 
 Visit [http://localhost:3000](http://localhost:3000) to view the site.
 
+## Admin panel
+
+- Path: `/admin`
+- Default credentials: `admin` / `fancyvinoadmin2025`
+- Override with secrets:
+  - `ADMIN_USERNAME`
+  - `ADMIN_PASSWORD`
+  - `ADMIN_SESSION_SECRET`
+- Store these in GitHub repository secrets and sync to Vercel Project → Settings → Environment Variables for secure storage. The admin session cookie is HTTP-only and scoped to this site.
+
 ## Quality checks
 
 - Lint: `npm run lint`
