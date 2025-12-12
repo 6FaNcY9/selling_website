@@ -1,0 +1,96 @@
+{
+  "categories": [
+    {
+      "id": "electronics",
+      "name": "Electronics",
+      "description": "Phones, audio, and smart gear to power your day.",
+      "image": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "home",
+      "name": "Home",
+      "description": "Cozy essentials for living rooms, kitchens, and beyond.",
+      "image": "https://images.unsplash.com/photo-1484156818044-c040038b0710?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "fashion",
+      "name": "Fashion",
+      "description": "Modern staples and statement pieces for every season.",
+      "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80"
+    }
+  ],
+  "products": [
+    {
+      "id": "sku-aurora-headphones",
+      "name": "Aurora Noise-Canceling Headphones",
+      "price": "$189",
+      "category": "electronics",
+      "image": "https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=800&q=80",
+      "description": "Wireless over-ear headphones with adaptive EQ and 30-hour battery life.",
+      "featured": true
+    },
+    {
+      "id": "sku-lumen-lamp",
+      "name": "Lumen Touch Lamp",
+      "price": "$72",
+      "category": "home",
+      "image": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=800&q=80",
+      "description": "Soft-glow bedside lamp with ambient color presets and USB-C charging.",
+      "featured": true
+    },
+    {
+      "id": "sku-pulse-speaker",
+      "name": "Pulse Mini Bluetooth Speaker",
+      "price": "$58",
+      "category": "electronics",
+      "image": "https://images.unsplash.com/photo-1507878866276-a947ef722fee?auto=format&fit=crop&w=800&q=80",
+      "description": "Pocket-sized speaker with rich bass, splash resistance, and 12-hour playtime.",
+      "featured": true
+    },
+    {
+      "id": "sku-harbor-throw",
+      "name": "Harbor Knit Throw",
+      "price": "$48",
+      "category": "home",
+      "image": "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=800&q=80",
+      "description": "Cozy cotton knit throw blanket with breathable weave and soft texture.",
+      "featured": false
+    },
+    {
+      "id": "sku-echo-watch",
+      "name": "Echo Active Watch",
+      "price": "$129",
+      "category": "fashion",
+      "image": "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80",
+      "description": "Slim smartwatch with wellness tracking, notifications, and interchangeable bands.",
+      "featured": false
+    },
+    {
+      "id": "sku-arc-backpack",
+      "name": "Arc Daypack",
+      "price": "$94",
+      "category": "fashion",
+      "image": "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=800&q=80",
+      "description": "Weather-resistant backpack with padded laptop sleeve and modular storage.",
+      "featured": false
+    },
+    {
+      "id": "sku-soho-mug",
+      "name": "Soho Ceramic Mug Set",
+      "price": "$36",
+      "category": "home",
+      "image": "https://images.unsplash.com/photo-1464306208223-1621500f0b4b?auto=format&fit=crop&w=800&q=80",
+      "description": "Pair of 12oz ceramic mugs with matte glaze and stackable design.",
+      "featured": false
+    },
+    {
+      "id": "sku-vista-sunglasses",
+      "name": "Vista Polarized Sunglasses",
+      "price": "$68",
+      "category": "fashion",
+      "image": "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?auto=format&fit=crop&w=800&q=80",
+      "description": "Lightweight sunglasses with polarized lenses and UV400 protection.",
+      "featured": false
+    }
+  ]
+}
