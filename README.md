@@ -1,14 +1,14 @@
 ## Overview
 
-Codex Web selling starter built with Next.js and Tailwind CSS. The landing page is a modern dark theme that highlights dynamic instruction flows, Codex features, and a guided path to deploy on Vercel.
+AmberDrops is a warm, dropshipping-focused starter built with Next.js and Tailwind CSS. The landing pages highlight curated products across Amazon, Temu, Shein, and boutique partners while keeping shipping windows and supplier details clear.
 
 Key routes:
 
-- `/` — Home (selling-focused hero and sections)
-- `/selling` — Plan cards and deployment notes
-- `/about` — Project overview and stack
-- `/login` — User login form (admins can also sign in here)
-- `/admin` — Admin dashboard (credential-gated)
+- `/` — Home (AmberDrops hero, sourcing overview, and launch steps)
+- `/selling` — Catalog plans and perks
+- `/about` — Marketplace overview and sourcing model
+- `/login` — Customer login for tracking and saved items (admins can also sign in here)
+- `/admin` — Admin dashboard for curating drops and suppliers (credential-gated)
 
 ## Local development
 

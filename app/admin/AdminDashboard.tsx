@@ -112,13 +112,13 @@ export default function AdminDashboard({
   return (
     <div className="space-y-6">
       <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-        <section className="rounded-3xl border border-slate-800 bg-slate-950/60 p-6 shadow-xl shadow-sky-900/20">
+        <section className="rounded-3xl border border-orange-900/70 bg-amber-500/5 p-6 shadow-xl shadow-amber-900/20">
           <div className="flex items-center justify-between gap-3">
             <div>
               <p className="text-sm font-semibold text-white">
                 Hero + CTA content
               </p>
-              <p className="text-sm text-slate-300">
+              <p className="text-sm text-amber-100/80">
                 Edit headline, supporting copy, and primary call-to-action.
               </p>
             </div>
@@ -127,10 +127,10 @@ export default function AdminDashboard({
             </span>
           </div>
           <div className="mt-4 grid gap-4 md:grid-cols-2">
-            <label className="space-y-1 text-sm text-slate-200">
+            <label className="space-y-1 text-sm text-amber-100/80">
               Headline
               <input
-                className="w-full rounded-lg border border-slate-800 bg-slate-900/80 px-3 py-2 text-sm text-slate-100 outline-none ring-1 ring-transparent transition focus:border-sky-500 focus:ring-sky-500/40"
+                className="w-full rounded-lg border border-orange-900/70 bg-black/60 px-3 py-2 text-sm text-amber-50 outline-none ring-1 ring-transparent transition focus:border-amber-500 focus:ring-amber-500/40"
                 value={heroDraft.headline}
                 onChange={(event) =>
                   setHeroDraft((prev) => ({
@@ -141,10 +141,10 @@ export default function AdminDashboard({
                 placeholder="Hero headline"
               />
             </label>
-            <label className="space-y-1 text-sm text-slate-200">
+            <label className="space-y-1 text-sm text-amber-100/80">
               CTA label
               <input
-                className="w-full rounded-lg border border-slate-800 bg-slate-900/80 px-3 py-2 text-sm text-slate-100 outline-none ring-1 ring-transparent transition focus:border-sky-500 focus:ring-sky-500/40"
+                className="w-full rounded-lg border border-orange-900/70 bg-black/60 px-3 py-2 text-sm text-amber-50 outline-none ring-1 ring-transparent transition focus:border-amber-500 focus:ring-amber-500/40"
                 value={heroDraft.ctaLabel}
                 onChange={(event) =>
                   setHeroDraft((prev) => ({
@@ -156,10 +156,10 @@ export default function AdminDashboard({
               />
             </label>
           </div>
-          <label className="mt-4 block space-y-1 text-sm text-slate-200">
+          <label className="mt-4 block space-y-1 text-sm text-amber-100/80">
             Supporting copy
             <textarea
-              className="w-full rounded-lg border border-slate-800 bg-slate-900/80 px-3 py-2 text-sm text-slate-100 outline-none ring-1 ring-transparent transition focus:border-sky-500 focus:ring-sky-500/40"
+              className="w-full rounded-lg border border-orange-900/70 bg-black/60 px-3 py-2 text-sm text-amber-50 outline-none ring-1 ring-transparent transition focus:border-amber-500 focus:ring-amber-500/40"
               value={heroDraft.subheading}
               onChange={(event) =>
                 setHeroDraft((prev) => ({
@@ -173,11 +173,11 @@ export default function AdminDashboard({
           </label>
         </section>
 
-        <section className="rounded-3xl border border-slate-800 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 p-6 shadow-xl shadow-sky-900/30">
+        <section className="rounded-3xl border border-orange-900/70 bg-gradient-to-br from-orange-950 via-rose-950 to-black p-6 shadow-xl shadow-amber-900/30">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-semibold text-white">Live preview</p>
-              <p className="text-sm text-slate-300">
+              <p className="text-sm text-amber-100/80">
                 Mirrors what will render on the public homepage once synced.
               </p>
             </div>
@@ -185,22 +185,22 @@ export default function AdminDashboard({
               Preview only
             </span>
           </div>
-          <div className="mt-4 space-y-3 rounded-2xl border border-slate-800 bg-slate-950/60 p-4">
+          <div className="mt-4 space-y-3 rounded-2xl border border-orange-900/70 bg-amber-500/5 p-4">
             <p className="text-xl font-semibold text-white">
               {previewHero.headline}
             </p>
-            <p className="text-sm text-slate-300">{previewHero.subheading}</p>
-            <button className="inline-flex items-center gap-2 rounded-lg bg-sky-500 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-sky-400">
+            <p className="text-sm text-amber-100/80">{previewHero.subheading}</p>
+            <button className="inline-flex items-center gap-2 rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-amber-400">
               {previewHero.ctaLabel}
             </button>
           </div>
-          <div className="mt-4 space-y-2 text-sm text-slate-300">
+          <div className="mt-4 space-y-2 text-sm text-amber-100/80">
             <p className="font-semibold text-white">Launch steps</p>
             <ul className="space-y-1">
               {launchSteps.map((step) => (
                 <li
                   key={step}
-                  className="flex items-start gap-2 rounded-lg border border-slate-800 bg-slate-900/70 p-2"
+                  className="flex items-start gap-2 rounded-lg border border-orange-900/70 bg-black/50 p-2"
                 >
                   <span className="mt-1 h-2 w-2 rounded-full bg-emerald-400" />
                   {step}
@@ -212,15 +212,15 @@ export default function AdminDashboard({
       </div>
 
       <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-        <section className="rounded-3xl border border-slate-800 bg-slate-950/60 p-6 shadow-xl shadow-sky-900/20">
+        <section className="rounded-3xl border border-orange-900/70 bg-amber-500/5 p-6 shadow-xl shadow-amber-900/20">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-semibold text-white">Offers</p>
-              <p className="text-sm text-slate-300">
+              <p className="text-sm text-amber-100/80">
                 Add, remove, or tweak offer cards before publishing.
               </p>
             </div>
-            <span className="rounded-full bg-sky-500/20 px-3 py-1 text-xs font-semibold text-sky-200">
+            <span className="rounded-full bg-amber-500/20 px-3 py-1 text-xs font-semibold text-amber-200">
               Editable
             </span>
           </div>
@@ -229,20 +229,20 @@ export default function AdminDashboard({
             {offerDrafts.map((offer) => (
               <div
                 key={offer.id}
-                className="flex flex-col gap-2 rounded-2xl border border-slate-800 bg-slate-900/70 p-4 md:flex-row md:items-center md:justify-between"
+                className="flex flex-col gap-2 rounded-2xl border border-orange-900/70 bg-black/50 p-4 md:flex-row md:items-center md:justify-between"
               >
                 <div>
                   <p className="text-base font-semibold text-white">
                     {offer.title}{" "}
-                    <span className="text-sm text-sky-200">{offer.price}</span>
+                    <span className="text-sm text-amber-200">{offer.price}</span>
                   </p>
-                  <p className="text-sm text-slate-300">{offer.note}</p>
+                  <p className="text-sm text-amber-100/80">{offer.note}</p>
                 </div>
                 <div className="flex flex-wrap items-center gap-2">
                   {offer.bullets.slice(0, 3).map((bullet) => (
                     <span
                       key={bullet}
-                      className="rounded-full border border-slate-700 px-3 py-1 text-xs text-slate-200"
+                      className="rounded-full border border-orange-900/70 px-3 py-1 text-xs text-amber-100/80"
                     >
                       {bullet}
                     </span>
@@ -259,11 +259,11 @@ export default function AdminDashboard({
             ))}
           </div>
 
-          <div className="mt-5 grid gap-3 rounded-2xl border border-slate-800 bg-slate-900/80 p-4 md:grid-cols-3">
-            <label className="space-y-1 text-sm text-slate-200">
+          <div className="mt-5 grid gap-3 rounded-2xl border border-orange-900/70 bg-black/60 p-4 md:grid-cols-3">
+            <label className="space-y-1 text-sm text-amber-100/80">
               Title
               <input
-                className="w-full rounded-lg border border-slate-800 bg-slate-950/60 px-3 py-2 text-sm text-slate-100 outline-none ring-1 ring-transparent transition focus:border-sky-500 focus:ring-sky-500/40"
+                className="w-full rounded-lg border border-orange-900/70 bg-amber-500/5 px-3 py-2 text-sm text-amber-50 outline-none ring-1 ring-transparent transition focus:border-amber-500 focus:ring-amber-500/40"
                 value={newOffer.title}
                 onChange={(event) =>
                   setNewOffer((prev) => ({ ...prev, title: event.target.value }))
@@ -271,10 +271,10 @@ export default function AdminDashboard({
                 placeholder="Growth"
               />
             </label>
-            <label className="space-y-1 text-sm text-slate-200">
+            <label className="space-y-1 text-sm text-amber-100/80">
               Price
               <input
-                className="w-full rounded-lg border border-slate-800 bg-slate-950/60 px-3 py-2 text-sm text-slate-100 outline-none ring-1 ring-transparent transition focus:border-sky-500 focus:ring-sky-500/40"
+                className="w-full rounded-lg border border-orange-900/70 bg-amber-500/5 px-3 py-2 text-sm text-amber-50 outline-none ring-1 ring-transparent transition focus:border-amber-500 focus:ring-amber-500/40"
                 value={newOffer.price}
                 onChange={(event) =>
                   setNewOffer((prev) => ({ ...prev, price: event.target.value }))
@@ -282,10 +282,10 @@ export default function AdminDashboard({
                 placeholder="$39"
               />
             </label>
-            <label className="space-y-1 text-sm text-slate-200 md:col-span-1">
+            <label className="space-y-1 text-sm text-amber-100/80 md:col-span-1">
               Note
               <input
-                className="w-full rounded-lg border border-slate-800 bg-slate-950/60 px-3 py-2 text-sm text-slate-100 outline-none ring-1 ring-transparent transition focus:border-sky-500 focus:ring-sky-500/40"
+                className="w-full rounded-lg border border-orange-900/70 bg-amber-500/5 px-3 py-2 text-sm text-amber-50 outline-none ring-1 ring-transparent transition focus:border-amber-500 focus:ring-amber-500/40"
                 value={newOffer.note}
                 onChange={(event) =>
                   setNewOffer((prev) => ({ ...prev, note: event.target.value }))
@@ -296,14 +296,14 @@ export default function AdminDashboard({
             <button
               type="button"
               onClick={addOffer}
-              className="rounded-lg bg-sky-500 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-sky-400 md:col-span-3"
+              className="rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-amber-400 md:col-span-3"
             >
               Add offer to preview
             </button>
           </div>
         </section>
 
-        <section className="space-y-4 rounded-3xl border border-slate-800 bg-slate-950/60 p-6 shadow-xl shadow-sky-900/20">
+        <section className="space-y-4 rounded-3xl border border-orange-900/70 bg-amber-500/5 p-6 shadow-xl shadow-amber-900/20">
           <div className="flex items-center justify-between">
             <p className="text-sm font-semibold text-white">Access + signups</p>
             <span className="rounded-full bg-amber-500/20 px-3 py-1 text-xs font-semibold text-amber-200">
@@ -312,17 +312,17 @@ export default function AdminDashboard({
           </div>
 
           <form
-            className="space-y-3 rounded-2xl border border-slate-800 bg-slate-900/70 p-4"
+            className="space-y-3 rounded-2xl border border-orange-900/70 bg-black/50 p-4"
             onSubmit={handleAccessRequest}
           >
-            <p className="text-sm text-slate-300">
+            <p className="text-sm text-amber-100/80">
               Track who needs admin access. Wire this into GitHub/Vercel email
               flows next.
             </p>
-            <label className="space-y-1 text-sm text-slate-200">
+            <label className="space-y-1 text-sm text-amber-100/80">
               Work email
               <input
-                className="w-full rounded-lg border border-slate-800 bg-slate-950/60 px-3 py-2 text-sm text-slate-100 outline-none ring-1 ring-transparent transition focus:border-sky-500 focus:ring-sky-500/40"
+                className="w-full rounded-lg border border-orange-900/70 bg-amber-500/5 px-3 py-2 text-sm text-amber-50 outline-none ring-1 ring-transparent transition focus:border-amber-500 focus:ring-amber-500/40"
                 value={accessRequest.email}
                 onChange={(event) =>
                   setAccessRequest((prev) => ({
@@ -335,10 +335,10 @@ export default function AdminDashboard({
                 required
               />
             </label>
-            <label className="space-y-1 text-sm text-slate-200">
+            <label className="space-y-1 text-sm text-amber-100/80">
               Notes / scope
               <textarea
-                className="w-full rounded-lg border border-slate-800 bg-slate-950/60 px-3 py-2 text-sm text-slate-100 outline-none ring-1 ring-transparent transition focus:border-sky-500 focus:ring-sky-500/40"
+                className="w-full rounded-lg border border-orange-900/70 bg-amber-500/5 px-3 py-2 text-sm text-amber-50 outline-none ring-1 ring-transparent transition focus:border-amber-500 focus:ring-amber-500/40"
                 value={accessRequest.note}
                 onChange={(event) =>
                   setAccessRequest((prev) => ({
@@ -361,20 +361,20 @@ export default function AdminDashboard({
             ) : null}
           </form>
 
-          <div className="space-y-2 rounded-2xl border border-slate-800 bg-slate-900/70 p-4">
+          <div className="space-y-2 rounded-2xl border border-orange-900/70 bg-black/50 p-4">
             <div className="flex items-center justify-between">
               <p className="text-sm font-semibold text-white">Activity</p>
-              <span className="rounded-full bg-slate-800 px-2 py-1 text-[11px] text-slate-200">
+              <span className="rounded-full bg-orange-900/70 px-2 py-1 text-[11px] text-amber-100/80">
                 Last {activity.length} updates
               </span>
             </div>
-            <ul className="space-y-2 text-sm text-slate-200">
+            <ul className="space-y-2 text-sm text-amber-100/80">
               {activity.map((entry) => (
                 <li
                   key={entry}
-                  className="flex items-start gap-2 rounded-lg border border-slate-800 bg-slate-950/70 p-2"
+                  className="flex items-start gap-2 rounded-lg border border-orange-900/70 bg-amber-500/5 p-2"
                 >
-                  <span className="mt-1 h-2 w-2 rounded-full bg-sky-400" />
+                  <span className="mt-1 h-2 w-2 rounded-full bg-amber-400" />
                   {entry}
                 </li>
               ))}
